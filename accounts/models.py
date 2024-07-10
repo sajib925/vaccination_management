@@ -9,4 +9,4 @@ class CustomUser(AbstractUser):
         ('patient', 'patient'),
     )
     
-    role = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default="patient")
+    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default="patient", null=True)

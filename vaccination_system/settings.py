@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-AUTH_USER_MODEL = "accounts.CustomUser" 
+AUTH_USER_MODEL = 'accounts.CustomUser'
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Quick-start development settings - unsuitable for production
@@ -29,6 +29,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+}
 
 # Application definition
 
@@ -48,13 +52,13 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
-    'accounts',
+    "accounts.apps.AccountsConfig",
     'bookings',
     'campaign',
     'review',
 ]
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 SITE_ID = 1
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # If you want to skip email verification
 ACCOUNT_EMAIL_VERIFICATION = 'none'
@@ -63,7 +67,7 @@ ACCOUNT_EMAIL_REQUIRED = False
 REST_FRAMEWORK = {
     
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
     
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -179,6 +183,3 @@ REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
 }
 
-REST_AUTH_SERIALIZERS = {
-    'LOGIN_SERIALIZER': 'accounts.serializers.CustomLoginSerializer',
-}

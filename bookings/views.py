@@ -14,8 +14,9 @@ class BookingList(APIView):
 
     def post(self, request, format=None):
         serializer = BookingModelSerializer(data=request.data)
+        serializer.patient = request.user
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(patient = request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

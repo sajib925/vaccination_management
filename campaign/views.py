@@ -61,7 +61,7 @@ class VaccineList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        self.check_permissions(request)  # Check if user has permission to post
+        # self.check_permissions(request)  # Check if user has permission to post
         serializer = VaccinesModelSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -83,7 +83,7 @@ class VaccineDetail(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        self.check_permissions(request)  # Check if user has permission to put
+        # self.check_permissions(request)  # Check if user has permission to put
         vaccine = self.get_object(pk)
         serializer = VaccinesModelSerializer(vaccine, data=request.data)
         if serializer.is_valid():
@@ -92,7 +92,7 @@ class VaccineDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
-        self.check_permissions(request)  # Check if user has permission to delete
+        # self.check_permissions(request)  # Check if user has permission to delete
         vaccine = self.get_object(pk)
         vaccine.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -106,7 +106,7 @@ class ScheduleList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        self.check_permissions(request)  # Check if user has permission to post
+        # self.check_permissions(request)  # Check if user has permission to post
         serializer = ScheduleModelSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -128,7 +128,7 @@ class ScheduleDetail(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        self.check_permissions(request)  # Check if user has permission to put
+        # self.check_permissions(request)  # Check if user has permission to put
         schedule = self.get_object(pk)
         serializer = ScheduleModelSerializer(schedule, data=request.data)
         if serializer.is_valid():
@@ -137,7 +137,7 @@ class ScheduleDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
-        self.check_permissions(request)  # Check if user has permission to delete
+        # self.check_permissions(request)  # Check if user has permission to delete
         schedule = self.get_object(pk)
         schedule.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
