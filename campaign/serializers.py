@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CampaignModel, VaccinesModel, ScheduleModel
+from .models import CampaignModel, VaccinesModel
 
 
 
@@ -9,15 +9,10 @@ class CampaignModelSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'created_at', 'updated_at']
 
 class VaccinesModelSerializer(serializers.ModelSerializer):
+    doctor_username = serializers.ReadOnlyField(source='doctor.username')
     class Meta:
         model = VaccinesModel
-        fields = ['id', 'name']
+        fields = ['id','doctor_username', 'name', 'schedule' ]
 
-class ScheduleModelSerializer(serializers.ModelSerializer):
-    campaign_name = serializers.ReadOnlyField(source='campaign.name')
-    vaccine_name = serializers.ReadOnlyField(source='vaccine.name')
 
-    class Meta:
-        model = ScheduleModel
-        fields = ['id', 'campaign', 'campaign_name', 'vaccine', 'vaccine_name', 'date']
 
